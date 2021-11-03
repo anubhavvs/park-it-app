@@ -13,6 +13,7 @@ class Area {
   final String name;
   final String city;
   final int numSlots;
+  final int price;
   final List<Slot> slots;
 
   Area(
@@ -20,5 +21,6 @@ class Area {
       @required this.city,
       @required this.name,
       @required this.numSlots,
-      @required this.slots});
+      @required this.slots,
+      @required this.price});
 }

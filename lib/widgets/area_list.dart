@@ -12,8 +12,8 @@ class AreaList extends StatelessWidget {
     return ListView.builder(
       padding: const EdgeInsets.all(10.0),
       itemCount: areas.length,
-      itemBuilder: (ctx, i) => AreaItem(
-          areas[i].id, areas[i].name, areas[i].city, areas[i].numSlots),
+      itemBuilder: (ctx, i) => AreaItem(areas[i].id, areas[i].name,
+          areas[i].city, areas[i].numSlots, areas[i].price, areas[i].slots),
     );
   }
 }

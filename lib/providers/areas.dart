@@ -37,6 +37,7 @@ class Areas with ChangeNotifier {
                 name: value['name'],
                 city: value['city'],
                 numSlots: value['numSlots'],
+                price: value['price'],
                 slots: loadedSlots)),
             value['slots'].forEach((slot) => loadedSlots.add(Slot(
                 id: slot['_id'], name: slot['name'], filled: slot['filled']))),
