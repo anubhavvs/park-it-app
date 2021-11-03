@@ -70,6 +70,9 @@ class Auth with ChangeNotifier {
       if (response.statusCode == 401) {
         throw HttpException(json.decode(response.body)['message']);
       }
+      if (json.decode(response.body)['isAdmin']) {
+        throw HttpException('Admin users not allowed.');
+      }
       _token = json.decode(response.body)['token'];
       _userId = json.decode(response.body)['_id'];
       _expiryDate = DateTime.now().add(Duration(days: 30));

@@ -70,6 +70,7 @@ class _AreasOverviewScreenState extends State<AreasOverviewScreen> {
             child: GestureDetector(
               onTap: () {
                 Provider.of<Auth>(context, listen: false).logout();
+                Navigator.of(context).pushReplacementNamed('/');
               },
               child: Icon(Icons.exit_to_app),
             ),
