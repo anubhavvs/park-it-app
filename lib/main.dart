@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_config/flutter_config.dart';
+import 'package:flutter/services.dart';
 
 import './screens/areas_overview.dart';
 import './screens/area_slot.dart';
@@ -10,6 +11,10 @@ import './providers/areas.dart';
 import './providers/auth.dart';
 
 void main() async {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.dark,
+  ));
   WidgetsFlutterBinding.ensureInitialized(); // Required by FlutterConfig
   await FlutterConfig.loadEnvVariables();
 
@@ -29,7 +34,9 @@ class MyApp extends StatelessWidget {
       child: Consumer<Auth>(
           builder: (ctx, auth, _) => MaterialApp(
                 title: 'Park It',
+                debugShowCheckedModeBanner: false,
                 theme: ThemeData(
+                  scaffoldBackgroundColor: Colors.white,
                   primarySwatch: Colors.green,
                 ),
                 home: auth.isAuth

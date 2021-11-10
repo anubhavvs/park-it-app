@@ -33,16 +33,66 @@ class _AreaSlotScreenState extends State<AreaSlotScreen> {
     final areadId = ModalRoute.of(context).settings.arguments as String;
     final loadedArea = Provider.of<Areas>(context).findById(areadId);
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text(loadedArea.name),
+          centerTitle: true,
+          elevation: 8,
+          shadowColor: Color(0xff675AA7).withOpacity(0.5),
+          //backgroundColor: Color(0xff020D26),
+          backgroundColor: Colors.white,
+          toolbarHeight: 100,
+          title: Text(
+            loadedArea.name.toUpperCase(),
+            style: TextStyle(
+              letterSpacing: 1.5,
+              color: Color(0xff26C0D6),
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+            ),
+          ),
+          leading: Container(
+            child: BackButton(
+              color: Colors.black,
+            ),
+          ),
         ),
         body: Column(children: [
-          GestureDetector(
+          Padding(
+            padding: const EdgeInsets.only(top: 0, bottom: 45.0),
             child: Container(
-              child: Icon(Icons.access_time),
-              margin: EdgeInsets.only(top: 20, bottom: 20),
+              height: 46.0,
+              width: 110.0,
+              child: Container(
+                decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color(0xff675AA7).withOpacity(0.5),
+                        spreadRadius: 3,
+                        blurRadius: 7,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                    color: Color(0xffD5DFF2),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                    )),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  child: GestureDetector(
+                    child: Container(
+                        child: Image.asset(
+                      'images/clk.gif',
+                      width: 50,
+                      height: 80,
+                    )),
+                    onTap: () => pickTime(context),
+                  ),
+                ),
+              ),
             ),
-            onTap: () => pickTime(context),
+
+            // title: Text("Choose your Slot: "),
           ),
           Flexible(
             child: RefreshIndicator(
@@ -65,19 +115,56 @@ class _AreaSlotScreenState extends State<AreaSlotScreen> {
                               });
                             },
                       child: Card(
+                        margin: EdgeInsets.only(left: 15, right: 15),
+                        elevation: 0,
+                        shadowColor: Color(0xff8E8E8E),
+                        shape: Border(
+                            top: i == 0 || i == 1
+                                ? BorderSide(
+                                    width: 2.0,
+                                    color: Color(0xff675AA7).withOpacity(0.5),
+                                  )
+                                : BorderSide(width: 0.0, color: Colors.white),
+                            left: i % 2 == 0
+                                ? BorderSide(
+                                    width: 2.0,
+                                    color: Color(0xff675AA7).withOpacity(0.5),
+                                  )
+                                : BorderSide(width: 0.0, color: Colors.white),
+                            right: i % 2 != 0
+                                ? BorderSide(
+                                    width: 2.0,
+                                    color: Color(0xff675AA7).withOpacity(0.5),
+                                  )
+                                : BorderSide(width: 0.0, color: Colors.white),
+                            bottom: BorderSide(
+                              width: 2.0,
+                              color: Color(0xff675AA7).withOpacity(0.5),
+                            )),
+
+                        //   top: BorderSide(
+                        //       width: 2.0, color: Colors.lightBlue.shade600),
+                        //   left: BorderSide(
+                        //       width: 2.0, color: Colors.lightBlue.shade600),
+                        // ),
                         color: loadedArea.slots[i].filled
-                            ? Colors.red
+                            ? Colors.white
                             : selectedSlot == i
-                                ? Colors.green
-                                : Colors.white54,
+                                ? Color(0xffD5DFF2)
+                                : Colors.white,
                         child: Container(
                           child: Center(
                               child: loadedArea.slots[i].filled
-                                  ? Icon(Icons.time_to_leave_outlined)
+                                  ? Image.asset(
+                                      'images/car.png',
+                                      width: 50,
+                                      height: 80,
+                                    )
                                   : Text(
                                       loadedArea.slots[i].name,
                                       style: TextStyle(
                                           fontSize: 15,
+                                          color: Color(0xff26C0D6),
                                           fontWeight: FontWeight.w800),
                                     )),
                         ),
@@ -86,9 +173,9 @@ class _AreaSlotScreenState extends State<AreaSlotScreen> {
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     childAspectRatio: 2 / 3,
-                    crossAxisSpacing: 5,
-                    mainAxisExtent: 90,
-                    mainAxisSpacing: 5),
+                    crossAxisSpacing: 30,
+                    mainAxisExtent: 70,
+                    mainAxisSpacing: 0),
               ),
             ),
           ),
