@@ -1,8 +1,9 @@
 import 'dart:convert';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_config/flutter_config.dart';
 import 'package:http/http.dart' as http;
+import '../models/http_exception.dart';
 
 class BookingItem with ChangeNotifier {
   final String id;
@@ -10,28 +11,29 @@ class BookingItem with ChangeNotifier {
   final String bookedArea;
   final String bookedSlot;
   final String slotTime;
-  final DateTime startTime;
-  final DateTime endTime;
-  final double price;
+  final String startTime;
+  final String endTime;
+  final int price;
   final bool paid;
+  final String status;
 
-  BookingItem({
-    @required this.id,
-    @required this.bookedCity,
-    @required this.bookedArea,
-    @required this.bookedSlot,
-    @required this.slotTime,
-    @required this.startTime,
-    @required this.endTime,
-    @required this.price,
-    @required this.paid,
-  });
+  BookingItem(
+      {@required this.id,
+      @required this.bookedCity,
+      @required this.bookedArea,
+      @required this.bookedSlot,
+      @required this.slotTime,
+      @required this.startTime,
+      @required this.endTime,
+      @required this.price,
+      @required this.paid,
+      @required this.status});
 }
 
 class Bookings with ChangeNotifier {
   List<BookingItem> _bookings = [];
   String _authToken;
-  String userId;
+  String _bookingId;
 
   set authToken(String value) {
     _authToken = value;
@@ -39,6 +41,52 @@ class Bookings with ChangeNotifier {
 
   List<BookingItem> get bookings {
     return [..._bookings];
+  }
+
+  Future<void> payment() async {
+    final prefs = await SharedPreferences.getInstance();
+    var url = '${FlutterConfig.get('API_URL')}/booking/${_bookingId}';
+    var uri = Uri.parse(url);
+    try {
+      final response = await http
+          .put(uri, headers: {'Authorization': 'Bearer ' + _authToken});
+      if (response.statusCode == 401) {
+        throw HttpException(json.decode(response.body)['message']);
+      }
+    } catch (error) {
+      throw error;
+    }
+    prefs.setBool('activeBooking', false);
+    prefs.setString('activeBookingId', null);
+    notifyListeners();
+  }
+
+  Future<BookingItem> fetchAndSetActiveBooking() async {
+    final prefs = await SharedPreferences.getInstance();
+    _bookingId = prefs.getString('activeBookingId');
+    var url = '${FlutterConfig.get('API_URL')}/booking/${_bookingId}';
+    var uri = Uri.parse(url);
+    try {
+      final response = await http
+          .get(uri, headers: {'Authorization': 'Bearer ' + _authToken});
+      if (response.statusCode == 401) {
+        throw HttpException(json.decode(response.body)['message']);
+      }
+      final finalRes = json.decode(response.body);
+      return BookingItem(
+          id: finalRes['_id'],
+          bookedCity: finalRes['bookedCity'],
+          bookedArea: finalRes['bookedArea'],
+          bookedSlot: finalRes['bookedSlot'],
+          slotTime: finalRes['slotTime'],
+          startTime: finalRes['startTime'],
+          endTime: finalRes['endTime'],
+          price: finalRes['price'],
+          paid: finalRes['paid'],
+          status: finalRes['status']);
+    } catch (error) {
+      throw error;
+    }
   }
 
   Future<void> addBooking(
@@ -64,8 +112,12 @@ class Bookings with ChangeNotifier {
               startTime: finalRes['startTime'],
               endTime: finalRes['endTime'],
               price: finalRes['price'],
-              paid: finalRes['paid']));
+              paid: finalRes['paid'],
+              status: finalRes['status']));
       notifyListeners();
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setBool('activeBooking', true);
+      prefs.setString('activeBookingId', finalRes['_id']);
     } catch (error) {
       throw error;
     }

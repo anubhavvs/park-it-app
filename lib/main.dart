@@ -6,6 +6,8 @@ import './screens/areas_overview.dart';
 import './screens/area_slot.dart';
 import './screens/auth.dart';
 import './screens/splash_screen.dart';
+import './screens/booking.dart';
+
 import './providers/areas.dart';
 import './providers/auth.dart';
 import './providers/bookings.dart';
@@ -37,7 +39,9 @@ class MyApp extends StatelessWidget {
                   primarySwatch: Colors.green,
                 ),
                 home: auth.isAuth
-                    ? AreasOverviewScreen()
+                    ? auth.active
+                        ? BookingScreen()
+                        : AreasOverviewScreen()
                     : FutureBuilder(
                         future: auth.tryAutoLogin(),
                         builder: (ctx, authResult) =>
@@ -45,7 +49,10 @@ class MyApp extends StatelessWidget {
                                     ConnectionState.waiting
                                 ? SplashScreen()
                                 : AuthScreen()),
-                routes: {AreaSlotScreen.routeName: (ctx) => AreaSlotScreen()},
+                routes: {
+                  AreaSlotScreen.routeName: (ctx) => AreaSlotScreen(),
+                  BookingScreen.routeName: (ctx) => BookingScreen()
+                },
               )),
     );
   }

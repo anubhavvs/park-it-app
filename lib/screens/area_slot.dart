@@ -68,9 +68,10 @@ class _AreaSlotScreenState extends State<AreaSlotScreen> {
         _isLoading = true;
       });
       try {
-        print(finalTime);
         await Provider.of<Bookings>(context, listen: false).addBooking(
             loadedArea.id, loadedArea.slots[selectedSlot].name, finalTime);
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/booking', ModalRoute.withName('/'));
       } catch (error) {
         print(error);
       }
@@ -112,6 +113,24 @@ class _AreaSlotScreenState extends State<AreaSlotScreen> {
                               });
                             },
                       child: Card(
+                        margin: EdgeInsets.only(left: 10, right: 10),
+                        elevation: 0,
+                        shadowColor: Colors.black,
+                        shape: Border(
+                            top: BorderSide(
+                                width: 2.0, color: Colors.lightBlue.shade600),
+                            left: i % 2 == 0
+                                ? BorderSide(
+                                    width: 2.0,
+                                    color: Colors.lightBlue.shade600)
+                                : BorderSide(width: 0.0, color: Colors.white),
+                            right: i % 2 != 0
+                                ? BorderSide(
+                                    width: 2.0,
+                                    color: Colors.lightBlue.shade600)
+                                : BorderSide(width: 0.0, color: Colors.white),
+                            bottom: BorderSide(
+                                width: 2.0, color: Colors.lightBlue.shade600)),
                         color: loadedArea.slots[i].filled
                             ? Colors.red
                             : selectedSlot == i
