@@ -65,8 +65,14 @@ flutter:
   assets:
     - images/log.png 
     - images/logsh.png
-    - images/car.png
+    - images/bg.png
+    
+    - images/ava.gif
     - images/clk.gif
+    - images/cv.png
+    - images/se.png
+    - images/car_l.png
+    - images/car_r.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

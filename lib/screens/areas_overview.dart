@@ -63,20 +63,50 @@ class _AreasOverviewScreenState extends State<AreasOverviewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Park It'),
-        actions: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(right: 20.0),
-            child: GestureDetector(
-              onTap: () {
-                Provider.of<Auth>(context, listen: false).logout();
-                Navigator.of(context).pushReplacementNamed('/');
-              },
-              child: Icon(Icons.exit_to_app),
+          toolbarHeight: 190,
+          elevation: 10,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("images/bg.png"), fit: BoxFit.fill)),
+          ),
+          backgroundColor: Color(0xff5b3a68),
+          shadowColor: Colors.black,
+          title: Padding(
+            padding: const EdgeInsets.fromLTRB(10, 70, 10, 5),
+            child: Text(
+              "Find the best \nSpot for Parking",
+              style: TextStyle(
+                fontSize: 27,
+                letterSpacing: 0.1,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
           ),
-        ],
-      ),
+          actions: <Widget>[
+            Padding(
+              padding: EdgeInsets.fromLTRB(30, 0, 0, 90),
+              child: IconButton(
+                onPressed: () => {},
+                icon: Icon(Icons.person),
+                color: Color(0xfff47b4c),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(10, 0, 20, 90),
+              child: GestureDetector(
+                onTap: () {
+                  Provider.of<Auth>(context, listen: false).logout();
+                  Navigator.of(context).pushReplacementNamed('/');
+                },
+                child: Icon(
+                  Icons.exit_to_app,
+                  color: Color(0xfff47b4c),
+                ),
+              ),
+            ),
+          ]),
       body: _isLoading
           ? Center(
               child: CircularProgressIndicator(),

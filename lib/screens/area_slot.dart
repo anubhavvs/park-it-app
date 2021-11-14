@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -87,7 +89,7 @@ class _AreaSlotScreenState extends State<AreaSlotScreen> {
           shadowColor: Color(0xff675AA7).withOpacity(0.5),
           //backgroundColor: Color(0xff020D26),
           backgroundColor: Colors.white,
-          toolbarHeight: 100,
+          toolbarHeight: 90,
           title: Text(
             loadedArea.name.toUpperCase(),
             style: TextStyle(
@@ -97,6 +99,7 @@ class _AreaSlotScreenState extends State<AreaSlotScreen> {
               fontSize: 25,
             ),
           ),
+
           leading: Container(
             child: BackButton(
               color: Colors.black,
@@ -105,7 +108,8 @@ class _AreaSlotScreenState extends State<AreaSlotScreen> {
         ),
         body: Column(children: [
           Padding(
-            padding: const EdgeInsets.only(top: 0, bottom: 45.0),
+            padding: const EdgeInsets.only(top: 0, bottom: 25.0),
+
             child: Container(
               height: 46.0,
               width: 110.0,
@@ -141,6 +145,21 @@ class _AreaSlotScreenState extends State<AreaSlotScreen> {
 
             // title: Text("Choose your Slot: "),
           ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10.0),
+            child: Container(
+              child: Text(
+                "SELECT YOUR ENTRY TIME",
+                style: TextStyle(
+                  color: Colors.black.withOpacity(0.3),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
+                  letterSpacing: 0.4,
+                  wordSpacing: 0.4,
+                ),
+              ),
+            ),
+          ),
           Flexible(
             child: RefreshIndicator(
               onRefresh: () => _refreshSlots(context),
@@ -165,6 +184,7 @@ class _AreaSlotScreenState extends State<AreaSlotScreen> {
                         margin: EdgeInsets.only(left: 15, right: 15),
                         elevation: 0,
                         shadowColor: Color(0xff8E8E8E),
+
                         shape: Border(
                             top: i == 0 || i == 1
                                 ? BorderSide(
@@ -199,16 +219,29 @@ class _AreaSlotScreenState extends State<AreaSlotScreen> {
                             : selectedSlot == i
                                 ? Color(0xffD5DFF2)
                                 : Colors.white,
+
                         child: Container(
                           child: Center(
                               child: loadedArea.slots[i].filled
+                                  ? i % 2 == 0
+                                      ? Image.asset(
+                                          'images/car_r.png',
+                                          width: 50,
+                                          height: 80,
+                                        )
+                                      : Image.asset(
+                                          'images/car_l.png',
+                                          width: 50,
+                                          height: 80,
+                                        )
+                                  /* child: loadedArea.slots[i].filled
                                   ? Image.asset(
-                                      'images/car.png',
+                                      'images/car_l.png',
                                       width: 50,
                                       height: 80,
-                                    )
+                                    )*/
                                   : Text(
-                                      loadedArea.slots[i].name,
+                                      'P - ${loadedArea.slots[i].name}',
                                       style: TextStyle(
                                           fontSize: 15,
                                           color: Color(0xff26C0D6),
@@ -228,28 +261,100 @@ class _AreaSlotScreenState extends State<AreaSlotScreen> {
           ),
           Center(
               child: Card(
-                  margin: EdgeInsets.all(10),
-                  color: Colors.blueGrey,
+                  elevation: 5,
+                  shadowColor: Color(0xff675AA7).withOpacity(0.5),
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(color: Color(0xffD5DFF2), width: 1),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  margin: EdgeInsets.all(20),
+                  color: Color(0xffD5DFF2),
                   child: Padding(
-                      padding: EdgeInsets.all(16),
+                      padding: EdgeInsets.fromLTRB(15, 18, 15, 18),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text(loadedArea.name),
+                              Text(
+                                '${loadedArea.name} Parking Lot',
+                                style: TextStyle(
+                                    color: Color(0xff916DB0),
+                                    fontSize: 16,
+                                    fontFamily: 'Acumin Varibale Concept',
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.3,
+                                    wordSpacing: 0.2),
+                              ),
+                              Text(
+                                'Rs. ${loadedArea.price.toString()}/hr',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                    letterSpacing: 0.3,
+                                    wordSpacing: 0.2),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Icon(
+                                Icons.bubble_chart_outlined,
+                                size: 20,
+                              ),
                               if (selectedTime != null)
-                                Text('${selectedTime.format(context)}'),
+                                Text(
+                                  ' Time : ${selectedTime.format(context)} ',
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.4),
+                                      fontSize: 13,
+                                      fontFamily: 'Acumin Varibale Concept',
+                                      letterSpacing: 0.2,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               if (selectedSlot != -1)
-                                Text('${loadedArea.slots[selectedSlot].name}'),
-                              Text('Rs. ${loadedArea.price.toString()}/hour'),
+                                Text(
+                                  ' Slot No : P - ${loadedArea.slots[selectedSlot].name} ',
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.4),
+                                      fontSize: 13,
+                                      letterSpacing: 0.2,
+                                      fontFamily: 'Acumin Varibale Concept',
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              Image.asset(
+                                'images/se.png',
+                                width: 50,
+                                height: 50,
+                              ),
                             ],
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: 10),
+                            margin: EdgeInsets.only(top: 7),
                             child: ElevatedButton(
-                              child: Text('BOOK NOW'),
+                              style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                    Color(0xff916DB0),
+                                  ),
+                                  shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          side: BorderSide(
+                                              color: Color(0xff916DB0))))),
+                              child: Text(
+                                'BOOK NOW',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                    fontFamily: 'Acumin Variable Concept',
+                                    letterSpacing: 1.3,
+                                    wordSpacing: 0.2),
+                              ),
                               onPressed: selectedSlot == -1 ||
                                       selectedTime == null ||
                                       _isLoading
