@@ -179,8 +179,11 @@ class _AuthCardState extends State<AuthCard> {
                       //color: Colors.black.withOpacity(0.6),
                       fontSize: 15,
                     ),
-                    suffixIcon: Icon(Icons.email_outlined,
-                        size: 20, color: Color(0xff298360)),
+                    suffixIcon: Icon(
+                      Icons.email_outlined,
+                      size: 20,
+                      color: Color(0xff916DB0),
+                    ),
                   ),
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
@@ -202,8 +205,11 @@ class _AuthCardState extends State<AuthCard> {
                         //color: Color(0xff000C66),
                         fontSize: 15,
                       ),
-                      suffixIcon: Icon(Icons.person_outlined,
-                          size: 20, color: Color(0xff298360)),
+                      suffixIcon: Icon(
+                        Icons.person_outlined,
+                        size: 20,
+                        color: Color(0xff916DB0),
+                      ),
                     ),
                     validator: (value) {
                       if (value.isEmpty || value.length < 5) {
@@ -224,8 +230,11 @@ class _AuthCardState extends State<AuthCard> {
                         //color: Colors.black.withOpacity(0.6),
                         fontSize: 15,
                       ),
-                      suffixIcon: Icon(Icons.phone_android_outlined,
-                          size: 20, color: Color(0xff298360)),
+                      suffixIcon: Icon(
+                        Icons.phone_android_outlined,
+                        size: 20,
+                        color: Color(0xff916DB0),
+                      ),
                     ),
                     validator: (value) {
                       if (value.isEmpty || value.length < 10) {
@@ -244,11 +253,12 @@ class _AuthCardState extends State<AuthCard> {
                       labelText: 'Vehicle Number Plate *',
                       labelStyle: TextStyle(
                         //color: Colors.black.withOpacity(0.6),
+
                         fontSize: 15,
                       ),
                       suffixIcon: Icon(
                         Icons.time_to_leave_outlined,
-                        color: Color(0xff298360),
+                        color: Color(0xff916DB0),
                         size: 20,
                       ),
                     ),
@@ -276,7 +286,7 @@ class _AuthCardState extends State<AuthCard> {
                             ? Icons.security_outlined
                             : Icons.remove_moderator,
                         size: 18,
-                        color: Color(0xff298360),
+                        color: Color(0xff916DB0),
                       ),
                       onPressed: () {
                         ishidden = !ishidden;
@@ -310,7 +320,7 @@ class _AuthCardState extends State<AuthCard> {
                               ? Icons.security_outlined
                               : Icons.remove_moderator,
                           size: 18,
-                          color: Color(0xff298360),
+                          color: Color(0xff916DB0),
                         ),
                         onPressed: () {
                           ishidden = !ishidden;
@@ -345,7 +355,8 @@ class _AuthCardState extends State<AuthCard> {
                               : 'REGISTER'),
                           onPressed: _submit,
                           style: ElevatedButton.styleFrom(
-                              side: BorderSide(color: Colors.green, width: 1.0),
+                              side: BorderSide(
+                                  color: Color(0xff916DB0), width: 1.0),
                               minimumSize: Size(64.5, 38)),
                         ),
                       Divider(
@@ -357,7 +368,8 @@ class _AuthCardState extends State<AuthCard> {
                             '${_authMode == AuthMode.Login ? 'REGISTER' : 'LOGIN'} !'),
                         onPressed: _switchAuthMode,
                         style: OutlinedButton.styleFrom(
-                            side: BorderSide(color: Colors.green, width: 1.0),
+                            side: BorderSide(
+                                color: Color(0xff916DB0), width: 1.0),
                             minimumSize: Size(22.5, 38)),
                       ),
                     ],

@@ -22,6 +22,22 @@ void main() async {
   runApp(MyApp());
 }
 
+Map<int, Color> color = {
+  50: Color.fromRGBO(136, 14, 79, .1),
+  100: Color.fromRGBO(136, 14, 79, .2),
+  200: Color.fromRGBO(136, 14, 79, .3),
+  300: Color.fromRGBO(136, 14, 79, .4),
+  400: Color.fromRGBO(136, 14, 79, .5),
+  500: Color.fromRGBO(136, 14, 79, .6),
+  600: Color.fromRGBO(406, 14, 79, .7),
+  700: Color.fromRGBO(136, 14, 79, .8),
+  800: Color.fromRGBO(136, 14, 79, .9),
+  900: Color.fromRGBO(136, 14, 79, 1),
+};
+
+MaterialColor colorCustom = MaterialColor(0xff916DB0, color);
+MaterialColor coloCustom = MaterialColor(0xffD5DFF2, color);
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -41,7 +57,11 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 theme: ThemeData(
                   scaffoldBackgroundColor: Colors.white,
-                  primarySwatch: Colors.green,
+                  primarySwatch: colorCustom,
+                  // ignore: deprecated_member_use
+                  accentColor: Colors.blue[100],
+
+                  //primarySwatch: primarySwatch: createMaterialColor(Color(0xFF174378)
                 ),
                 home: auth.isAuth
                     ? AreasOverviewScreen()
