@@ -12,6 +12,7 @@ class Auth with ChangeNotifier {
   DateTime _expiryDate;
   String _userId;
   Timer _authTimer;
+  bool _activeBooking;
 
   bool get isAuth {
     return token != null;
@@ -24,6 +25,11 @@ class Auth with ChangeNotifier {
       return _token;
     }
     return null;
+  }
+
+  bool get active {
+    print(_activeBooking);
+    return _activeBooking;
   }
 
   Future<void> signup(String email, String password, String name, String number,
@@ -46,15 +52,17 @@ class Auth with ChangeNotifier {
       _token = json.decode(response.body)['token'];
       _userId = json.decode(response.body)['_id'];
       _expiryDate = DateTime.now().add(Duration(days: 30));
+      _activeBooking = json.decode(response.body)['activeBooking'];
       _autoLogout();
       notifyListeners();
       final prefs = await SharedPreferences.getInstance();
       final userData = json.encode({
         'token': _token,
         'userId': _userId,
-        'expiryDate': _expiryDate.toIso8601String()
+        'expiryDate': _expiryDate.toIso8601String(),
       });
       prefs.setString('user', userData);
+      prefs.setBool('activeBooking', _activeBooking);
     } catch (error) {
       throw error;
     }
@@ -76,6 +84,7 @@ class Auth with ChangeNotifier {
       _token = json.decode(response.body)['token'];
       _userId = json.decode(response.body)['_id'];
       _expiryDate = DateTime.now().add(Duration(days: 30));
+      _activeBooking = json.decode(response.body)['activeBooking'];
       _autoLogout();
       notifyListeners();
       final prefs = await SharedPreferences.getInstance();
@@ -85,6 +94,7 @@ class Auth with ChangeNotifier {
         'expiryDate': _expiryDate.toIso8601String()
       });
       prefs.setString('user', userData);
+      prefs.setBool('activeBooking', _activeBooking);
     } catch (error) {
       throw error;
     }
@@ -92,7 +102,7 @@ class Auth with ChangeNotifier {
 
   Future<bool> tryAutoLogin() async {
     final prefs = await SharedPreferences.getInstance();
-    if (!prefs.containsKey('user')) {
+    if (!prefs.containsKey('user') || !prefs.containsKey('activeBooking')) {
       return false;
     }
     final userData =
@@ -105,6 +115,8 @@ class Auth with ChangeNotifier {
     _token = userData['token'];
     _userId = userData['userId'];
     _expiryDate = expiryDate;
+    _activeBooking = prefs.getBool('activeBooking');
+    print(_activeBooking);
     notifyListeners();
     _autoLogout();
     return true;
