@@ -70,9 +70,10 @@ class _AreaSlotScreenState extends State<AreaSlotScreen> {
         _isLoading = true;
       });
       try {
-        print(finalTime);
         await Provider.of<Bookings>(context, listen: false).addBooking(
             loadedArea.id, loadedArea.slots[selectedSlot].name, finalTime);
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/booking', ModalRoute.withName('/'));
       } catch (error) {
         print(error);
       }
