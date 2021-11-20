@@ -19,6 +19,9 @@ void main() async {
     statusBarIconBrightness: Brightness.dark,
   ));
   WidgetsFlutterBinding.ensureInitialized(); // Required by FlutterConfig
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((value) => runApp(MyApp()));
+
   await FlutterConfig.loadEnvVariables();
 
   runApp(MyApp());

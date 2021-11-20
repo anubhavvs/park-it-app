@@ -20,7 +20,11 @@ class AuthScreen extends StatelessWidget {
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
+              image: new DecorationImage(
+                image: new AssetImage("images/sp_1.png"),
+                fit: BoxFit.cover,
+              ),
+              /*gradient: LinearGradient(
                 colors: [
                   Color.fromRGBO(32, 191, 85, 1).withOpacity(0.5),
                   Color.fromRGBO(1, 186, 239, 1).withOpacity(0.9),
@@ -28,7 +32,7 @@ class AuthScreen extends StatelessWidget {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 stops: [0, 1],
-              ),
+              ),*/
             ),
           ),
           SingleChildScrollView(
@@ -147,7 +151,8 @@ class _AuthCardState extends State<AuthCard> {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return Card(
-      shadowColor: Colors.blue[300],
+      color: Colors.white.withOpacity(0.9),
+      shadowColor: Colors.black,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),

@@ -68,7 +68,7 @@ class _AreasOverviewScreenState extends State<AreasOverviewScreen> {
           flexibleSpace: Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("images/bg.png"), fit: BoxFit.fill)),
+                    image: AssetImage("images/bggg.png"), fit: BoxFit.fill)),
           ),
           backgroundColor: Color(0xff5b3a68),
           shadowColor: Colors.black,
