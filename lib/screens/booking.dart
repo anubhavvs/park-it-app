@@ -91,7 +91,84 @@ class TimerWidegt extends StatelessWidget {
   TimerWidegt(this.time);
   @override
   Widget build(BuildContext context) {
-    return Text(time.toString());
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10, left: 50, right: 50),
+      child: Column(
+        children: <Widget>[
+          Image.asset(
+            'images/reach_1.png',
+            width: 372,
+            height: 370,
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 20, right: 20),
+            child: RichText(
+              overflow: TextOverflow.clip,
+              maxLines: 4,
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                  text: 'Your Booking Details:\n\n',
+                  style: TextStyle(
+                      fontFamily: 'Acumin Variable Concept',
+                      letterSpacing: 1.3,
+                      wordSpacing: 0.2,
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.w700,
+                      color: Color.fromRGBO(54, 35, 71, 1)),
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: 'Monday | 22/11/2021\n',
+                        style: TextStyle(
+                          fontFamily: 'Acumin Variable Concept',
+                          letterSpacing: 1.3,
+                          wordSpacing: 0.2,
+                          fontSize: 16.0,
+                          color: Color.fromRGBO(162, 162, 162, 1),
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(
+                              text: '22:00 PM [IST]',
+                              style: TextStyle(
+                                fontFamily: 'Acumin Variable Concept',
+                                letterSpacing: 1.3,
+                                wordSpacing: 0.2,
+                                fontSize: 15.0,
+                                color: Colors.grey,
+                              )),
+                        ]),
+                  ]),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(top: 0, left: 20, right: 20),
+            child: RichText(
+                overflow: TextOverflow.clip,
+                maxLines: 8,
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                    text: '\n00 : 04 : 47\n\n',
+                    style: TextStyle(
+                        fontFamily: 'Acumin Variable Concept',
+                        letterSpacing: 1.3,
+                        wordSpacing: 0.2,
+                        fontSize: 45.0,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black),
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: 'PLEASE REACH YOUR PARKING\nSPOT ON TIME',
+                          style: TextStyle(
+                              fontFamily: 'Acumin Variable Concept',
+                              letterSpacing: 1.3,
+                              wordSpacing: 0.2,
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.w700,
+                              color: Color(0xff916DB0))),
+                    ])),
+          )
+        ],
+      ),
+    );
   }
 }
 
