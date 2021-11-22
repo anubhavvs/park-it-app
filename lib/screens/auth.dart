@@ -236,7 +236,7 @@ class _AuthCardState extends State<AuthCard> {
                         fontSize: 15,
                       ),
                       suffixIcon: Icon(
-                        Icons.phone_android_outlined,
+                        Icons.home,
                         size: 20,
                         color: Color(0xff916DB0),
                       ),

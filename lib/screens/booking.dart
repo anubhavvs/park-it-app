@@ -73,7 +73,13 @@ class _BookingScreenState extends State<BookingScreen> {
                             'Please proceed to slot ${snapdata.data.bookedSlot}. ${snapdata.data.startTime.toString()}'));
                     break;
                   case 'EXIT SCAN SUCCESS':
-                    return Payment(snapdata.data.price.toInt());
+                    return Payment(
+                        snapdata.data.price.toInt(),
+                        snapdata.data.bookedSlot,
+                        snapdata.data.startTime,
+                        snapdata.data.endTime,
+                        snapdata.data.bookedArea,
+                        snapdata.data.bookedCity);
                     break;
                   default:
                     return Text('Please Wait');
@@ -92,7 +98,7 @@ class TimerWidegt extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10, left: 50, right: 50),
+      padding: const EdgeInsets.only(top: 40, left: 50, right: 50),
       child: Column(
         children: <Widget>[
           Image.asset(
@@ -112,7 +118,7 @@ class TimerWidegt extends StatelessWidget {
                       fontFamily: 'Acumin Variable Concept',
                       letterSpacing: 1.3,
                       wordSpacing: 0.2,
-                      fontSize: 25.0,
+                      fontSize: 20.0,
                       fontWeight: FontWeight.w700,
                       color: Color.fromRGBO(54, 35, 71, 1)),
                   children: <TextSpan>[
@@ -151,12 +157,12 @@ class TimerWidegt extends StatelessWidget {
                         fontFamily: 'Acumin Variable Concept',
                         letterSpacing: 1.3,
                         wordSpacing: 0.2,
-                        fontSize: 45.0,
+                        fontSize: 40.0,
                         fontWeight: FontWeight.w700,
                         color: Colors.black),
                     children: <TextSpan>[
                       TextSpan(
-                          text: 'PLEASE REACH YOUR PARKING\nSPOT ON TIME',
+                          text: 'PLEASE REACH YOUR PARKING SPOT ON TIME',
                           style: TextStyle(
                               fontFamily: 'Acumin Variable Concept',
                               letterSpacing: 1.3,
@@ -181,7 +187,14 @@ class ParkingStart extends StatelessWidget {
 
 class Payment extends StatelessWidget {
   final int amount;
-  Payment(this.amount);
+  final String slot_no;
+  final String start_time;
+  final String end_time;
+  final String booked_area;
+  final String booked_city;
+
+  Payment(this.amount, this.slot_no, this.start_time, this.end_time,
+      this.booked_area, this.booked_city);
   @override
   Widget build(BuildContext context) {
     void _onPay() {
@@ -195,6 +208,12 @@ class Payment extends StatelessWidget {
       children: <Widget>[
         Text('Payment'),
         Text('Amount: ${amount}'),
+        Text('EndTime:  ${end_time}'),
+        Text('SlotNo:  ${slot_no}'),
+        Text('Area:  ${booked_area}'),
+        Text('City:  ${booked_city}'),
+        Text('Starttime: ${start_time.split('T')[1].substring(0, 5)}'),
+        Text('Date: ${start_time.split('T')[0]}'),
         SizedBox(height: 20),
         OutlinedButton(onPressed: () => _onPay(), child: Text('Pay Now'))
       ],
