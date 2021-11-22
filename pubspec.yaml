@@ -75,8 +75,9 @@ flutter:
     - images/se.png
     - images/car_l.png
     - images/car_r.png
-    - images/wait.png
-    - images/success.png
+    - images/reach_1.png
+
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
