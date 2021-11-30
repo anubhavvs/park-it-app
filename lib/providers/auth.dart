@@ -29,7 +29,7 @@ class Auth with ChangeNotifier {
 
   bool get active {
     print(_activeBooking);
-    return _activeBooking;
+    return _activeBooking = false;
   }
 
   Future<void> signup(String email, String password, String name, String number,

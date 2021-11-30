@@ -65,12 +65,64 @@ class _BookingScreenState extends State<BookingScreen> {
                     return TimerWidegt(finalTime);
                     break;
                   case 'WAIT FOR SCAN':
-                    return Text('Please wait while we scan your number plate.');
+                    return Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: 42.0,
+                              left: 10.0,
+                              right: 10.0,
+                              top: 170.0),
+                          child: Image.asset(
+                            'images/wait.png',
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(left: 30.0, right: 30.0),
+                          child: Text(
+                            'Please wait while we scan your number plate.',
+                            style: TextStyle(
+                              fontFamily: 'Acumin Variable Concept',
+                              letterSpacing: 1.3,
+                              wordSpacing: 0.2,
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
                     break;
                   case 'ENTRY SCAN SUCCESS':
-                    return Center(
-                        child: Text(
-                            'Please proceed to slot ${snapdata.data.bookedSlot}. ${snapdata.data.startTime.toString()}'));
+                    return Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: 42.0,
+                              left: 10.0,
+                              right: 10.0,
+                              top: 170.0),
+                          child: Image.asset(
+                            'images/success.png',
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(left: 30.0, right: 30.0),
+                          child: Text(
+                            'Please proceed to slot ${snapdata.data.bookedSlot}. ${snapdata.data.startTime.toString()}',
+                            style: TextStyle(
+                              fontFamily: 'Acumin Variable Concept',
+                              letterSpacing: 1.3,
+                              wordSpacing: 0.2,
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
                     break;
                   case 'EXIT SCAN SUCCESS':
                     return Payment(
