@@ -39,16 +39,8 @@ class AreaItem extends StatelessWidget {
         child: ListTile(
           contentPadding:
               EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-          shape: RoundedRectangleBorder(
-              //side: BorderSide(color: Colors.blue, width: 0.0),
-              borderRadius: BorderRadius.circular(5.0)),
-          /*leading: Text(
-            '\n${freeSlots().toString()}',
-            style: TextStyle(
-              color: Colors.green,
-              fontWeight: FontWeight.bold,
-            ),
-          ),*/
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
           title: Text(
             '${name}' ' | ${city}',
             style: TextStyle(

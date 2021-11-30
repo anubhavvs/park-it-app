@@ -65,8 +65,18 @@ class MyApp extends StatelessWidget {
                   primarySwatch: colorCustom,
                   // ignore: deprecated_member_use
                   accentColor: Colors.blue[100],
+                  fontFamily: 'Acumin Variable Concept',
 
-                  //primarySwatch: primarySwatch: createMaterialColor(Color(0xFF174378)
+                  textTheme: TextTheme(
+                    bodyText1: TextStyle(
+                      fontSize: 15.0,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black.withOpacity(0.6),
+                      // fontFamily: 'Acumin Variable Concept',
+                      letterSpacing: 0.5,
+                      wordSpacing: 0.2,
+                    ),
+                  ),
                 ),
                 home: auth.isAuth
                     ? auth.active

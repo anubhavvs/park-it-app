@@ -62,7 +62,7 @@ flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
-  # uses-material-design: true
+  uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
   assets:
@@ -72,10 +72,13 @@ flutter:
     - images/sp_1.png
     - images/ava.gif
     - images/clk.gif
+    - images/coins.gif
     - images/se.png
     - images/car_l.png
     - images/car_r.png
+    - images/bar.png
     - images/reach_1.png
+    
 
   
   #   - images/a_dot_ham.jpeg
