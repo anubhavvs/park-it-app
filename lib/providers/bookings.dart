@@ -16,6 +16,7 @@ class BookingItem with ChangeNotifier {
   final int price;
   final bool paid;
   final String status;
+  final String created_at;
 
   BookingItem(
       {@required this.id,
@@ -27,7 +28,8 @@ class BookingItem with ChangeNotifier {
       @required this.endTime,
       @required this.price,
       @required this.paid,
-      @required this.status});
+      @required this.status,
+      @required this.created_at});
 }
 
 class Bookings with ChangeNotifier {
@@ -83,7 +85,8 @@ class Bookings with ChangeNotifier {
           endTime: finalRes['endTime'],
           price: finalRes['price'],
           paid: finalRes['paid'],
-          status: finalRes['status']);
+          status: finalRes['status'],
+          created_at: finalRes['createdAt']);
     } catch (error) {
       throw error;
     }
@@ -113,7 +116,8 @@ class Bookings with ChangeNotifier {
               endTime: finalRes['endTime'],
               price: finalRes['price'],
               paid: finalRes['paid'],
-              status: finalRes['status']));
+              status: finalRes['status'],
+              created_at: finalRes['createdAt']));
       notifyListeners();
       final prefs = await SharedPreferences.getInstance();
       prefs.setBool('activeBooking', true);

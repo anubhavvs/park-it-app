@@ -3,31 +3,38 @@ import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
 import 'package:intl/intl.dart';
 
-class TimerWidegt extends StatefulWidget {
+class Park_Start extends StatefulWidget {
   final String slotTime;
   final String booking_date;
   final String start_time;
   final String booked_area;
+  final String booked_slot;
+  final int price;
 
-  const TimerWidegt(
-      {Key key,
-      this.slotTime,
-      this.booking_date,
-      this.start_time,
-      this.booked_area})
-      : super(key: key);
+  const Park_Start({
+    Key key,
+    this.slotTime,
+    this.booking_date,
+    this.start_time,
+    this.booked_area,
+    this.booked_slot,
+    this.price,
+  }) : super(key: key);
 
   @override
-  State<TimerWidegt> createState() => _TimerWidegtState();
+  State<Park_Start> createState() => _Park_StartState();
 }
 
-class _TimerWidegtState extends State<TimerWidegt> {
+class _Park_StartState extends State<Park_Start> {
   DateTime endDate;
   String dateTime;
   int endTime;
   int bufferEndTime;
   DateTime date_at;
   String area;
+  String s_time;
+  String s_slot;
+  int b_price;
 
   @override
   void initState() {
@@ -38,6 +45,9 @@ class _TimerWidegtState extends State<TimerWidegt> {
     date_at =
         new DateFormat('yyyy-MM-dd').parse(widget.booking_date.split('T')[0]);
     area = widget.booked_area;
+    s_time = widget.start_time;
+    s_slot = widget.booked_slot;
+    b_price = widget.price;
   }
 
   void onEnd() {
@@ -79,8 +89,8 @@ class _TimerWidegtState extends State<TimerWidegt> {
               color: Colors.white,
               child: _hori_card(),
               margin: EdgeInsets.fromLTRB(26, 0, 26, 55),
-              shadowColor: Colors.purple.withOpacity(0.4),
-              elevation: 25,
+              shadowColor: Colors.purple.withOpacity(0.6),
+              elevation: 30,
               shape: RoundedRectangleBorder(
                 side: BorderSide(
                     color: Color(0xff916DB0).withOpacity(0.3), width: 1),
@@ -89,6 +99,16 @@ class _TimerWidegtState extends State<TimerWidegt> {
               clipBehavior: Clip.antiAlias,
             ),
           ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 105),
+              child: Image.asset(
+                'images/g.png',
+                height: 150,
+                width: 150,
+              ),
+            ),
+          )
         ],
       ),
     );
@@ -98,48 +118,54 @@ class _TimerWidegtState extends State<TimerWidegt> {
     return ListView(
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.fromLTRB(16, 18, 16, 0),
+          padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
           child: Image.asset(
-            'images/reach_1.png',
-            height: 180,
-            width: 180,
+            'images/car_giff.gif',
+            height: 310,
+            width: 310,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(25, 45, 25, 0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Text(
-                "Your Booking Details",
-                style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                  letterSpacing: 1.5,
-                  wordSpacing: 0.2,
-                ),
+        Container(
+          color: Color(0xff351A4D),
+          child: Center(
+            child: Padding(
+              padding: EdgeInsets.only(top: 22),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Text(
+                    "${s_slot}",
+                    style: TextStyle(
+                        fontFamily: 'Acumin Variable Concept',
+                        letterSpacing: 1.3,
+                        wordSpacing: 0.2,
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xff916DB0)),
+                  ),
+                  Text(
+                    "\u{20B9}${b_price}/hr",
+                    style: TextStyle(
+                        fontFamily: 'Acumin Variable Concept',
+                        letterSpacing: 1.3,
+                        wordSpacing: 0.2,
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xff916DB0)),
+                  ),
+                  Text(
+                    "${s_time.split('T')[1].substring(0, 5)}",
+                    style: TextStyle(
+                        fontFamily: 'Acumin Variable Concept',
+                        letterSpacing: 1.3,
+                        wordSpacing: 0.2,
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xff916DB0)),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(25, 10, 25, 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Text(
-                '${DateFormat('EEEE').format(date_at)} | ${date_at.day.toString().padLeft(2, '0')}/${date_at.month.toString().padLeft(2, '0')}/${date_at.year} | ${endDate.hour.toString().padLeft(2, '0')}:${endDate.minute.toString().padLeft(2, '0')}'
-                    .toUpperCase(),
-                style: TextStyle(
-                  fontSize: 15.0,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xff916DB0),
-                  letterSpacing: 1.5,
-                  wordSpacing: 0.2,
-                ),
-              ),
-            ],
+            ),
           ),
         ),
         Container(
@@ -248,11 +274,11 @@ class _TimerWidegtState extends State<TimerWidegt> {
                               ),
                             ),
                             TextSpan(
-                                text: ' Buffer Time has started ',
+                                text: 'Your slot time ',
                                 style: TextStyle(
                                     fontFamily: 'Acumin Variable Concept',
                                     letterSpacing: 1.3,
-                                    wordSpacing: 0.1,
+                                    wordSpacing: 0.2,
                                     fontSize: 15.0,
                                     fontWeight: FontWeight.w700,
                                     color: Colors.red)),
@@ -260,34 +286,40 @@ class _TimerWidegtState extends State<TimerWidegt> {
                 },
               );
             }
-            return RichText(
-                overflow: TextOverflow.clip,
-                maxLines: 8,
-                textAlign: TextAlign.center,
-                textHeightBehavior:
-                    TextHeightBehavior(applyHeightToFirstAscent: false),
-                text: TextSpan(
-                    text:
-                        '\n${time.hours == null ? '00' : time.hours.toString().padLeft(2, '0')} : ${time.min == null ? '00' : time.min.toString().padLeft(2, '0')} : ${time.sec.toString().padLeft(2, '0')}\n\n',
-                    style: TextStyle(
-                        fontFamily: 'Acumin Variable Concept',
-                        letterSpacing: 1.3,
-                        wordSpacing: 0.2,
-                        fontSize: 35.0,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black),
-                    children: <TextSpan>[
-                      TextSpan(
-                          text: 'Please reach your \nparking spot on time',
-                          style: TextStyle(
-                            fontFamily: 'Acumin Variable Concept',
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black.withOpacity(0.4),
-                            letterSpacing: 1.5,
-                            wordSpacing: 0.2,
-                          )),
-                    ]));
+            return Container(
+              color: Color(0xff351A4D),
+              height: 169,
+              child: RichText(
+                  overflow: TextOverflow.clip,
+                  maxLines: 8,
+                  textAlign: TextAlign.center,
+                  textHeightBehavior:
+                      TextHeightBehavior(applyHeightToFirstAscent: false),
+                  text: TextSpan(
+                      text:
+                          '\n${time.hours == null ? '00' : time.hours.toString().padLeft(2, '0')} : ${time.min == null ? '00' : time.min.toString().padLeft(2, '0')} : ${time.sec.toString().padLeft(2, '0')}\n',
+                      style: TextStyle(
+                          fontFamily: 'Acumin Variable Concept',
+                          letterSpacing: 1.3,
+                          wordSpacing: 0.2,
+                          fontSize: 35.0,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white),
+                      children: [
+                        WidgetSpan(
+                            child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text('Parking Time'.toUpperCase(),
+                                    style: TextStyle(
+                                      fontFamily: 'Acumin Variable Concept',
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white.withOpacity(0.3),
+                                      letterSpacing: 2,
+                                      wordSpacing: 0.5,
+                                    )))),
+                      ])),
+            );
           },
         ))
       ],

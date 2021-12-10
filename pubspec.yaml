@@ -27,6 +27,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  intl: ^0.17.0
+  flutter_countdown_timer: ^4.1.0
   flutter:
     sdk: flutter
 
@@ -40,6 +42,7 @@ dependencies:
   shared_preferences: ^2.0.8
 
 dev_dependencies:
+  
   flutter_native_splash: ^1.3.1
   flutter_test:
     sdk: flutter
@@ -65,20 +68,23 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-    - images/log.png   
-    - images/bggg.png 
+  assets:   
     - images/sp.png
     - images/sp_1.png
     - images/ava.gif
-    - images/clk.gif
+    - images/clk.gif 
+    - images/car_giff.gif
+    - images/tick.gif
+    - images/lic.gif
     - images/se.png
     - images/car_l.png
     - images/car_r.png
-    - images/reach_1.png
+    - images/reach.png
     - images/bar.png
+    - images/p1.png
+    - images/g.png
     - images/reach_1.png
-    - images/wait.png
+    - images/wait_s.png
     - images/success.png
    #   - images/a_dot_ham.jpeg
   

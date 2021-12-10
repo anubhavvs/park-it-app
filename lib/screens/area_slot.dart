@@ -89,21 +89,21 @@ class _AreaSlotScreenState extends State<AreaSlotScreen> {
           elevation: 8,
           shadowColor: Color(0xff675AA7).withOpacity(0.5),
           //backgroundColor: Color(0xff020D26),
-          backgroundColor: Colors.white,
+          backgroundColor: Color(0xff351A4D),
+
           toolbarHeight: 90,
           title: Text(
             loadedArea.name.toUpperCase(),
             style: TextStyle(
-              letterSpacing: 1.5,
-              color: Color(0xff26C0D6),
-              fontWeight: FontWeight.bold,
-              fontSize: 25,
-            ),
+                color: Colors.white,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 0.5),
           ),
 
           leading: Container(
             child: BackButton(
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
         ),
@@ -263,12 +263,12 @@ class _AreaSlotScreenState extends State<AreaSlotScreen> {
           Center(
               child: Card(
                   elevation: 5,
-                  shadowColor: Color(0xff675AA7).withOpacity(0.5),
+                  shadowColor: Colors.purple.withOpacity(0.4),
                   shape: RoundedRectangleBorder(
                     side: BorderSide(color: Color(0xffD5DFF2), width: 1),
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  margin: EdgeInsets.all(20),
+                  margin: EdgeInsets.fromLTRB(20, 10, 20, 20),
                   color: Color(0xffD5DFF2),
                   child: Padding(
                       padding: EdgeInsets.fromLTRB(15, 18, 15, 18),
@@ -289,7 +289,7 @@ class _AreaSlotScreenState extends State<AreaSlotScreen> {
                                     wordSpacing: 0.2),
                               ),
                               Text(
-                                'Rs. ${loadedArea.price.toString()}/hr',
+                                '\u{20B9} ${loadedArea.price.toString()}/hr',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
@@ -335,26 +335,27 @@ class _AreaSlotScreenState extends State<AreaSlotScreen> {
                           Container(
                             margin: EdgeInsets.only(top: 7),
                             child: ElevatedButton(
-                              style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                    Color(0xff916DB0),
-                                  ),
-                                  shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          side: BorderSide(
-                                              color: Color(0xff916DB0))))),
+                              clipBehavior: Clip.antiAlias,
+                              style: OutlinedButton.styleFrom(
+                                  backgroundColor: Color(0xff351A4D),
+                                  shadowColor: Colors.purple.withOpacity(0.4),
+                                  elevation: 10,
+                                  side: BorderSide(
+                                      color: Color(0xff351A4D), width: 3),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(5))),
+                                  minimumSize: Size(160, 42)),
                               child: Text(
                                 'BOOK NOW',
+                                textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                    fontFamily: 'Acumin Variable Concept',
-                                    letterSpacing: 1.3,
-                                    wordSpacing: 0.2),
+                                  fontSize: 15.0,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1.5,
+                                  wordSpacing: 0.2,
+                                ),
                               ),
                               onPressed: selectedSlot == -1 ||
                                       selectedTime == null ||

@@ -63,15 +63,18 @@ class _AreasOverviewScreenState extends State<AreasOverviewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          toolbarHeight: 190,
-          elevation: 10,
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("images/bggg.png"), fit: BoxFit.fill)),
-          ),
-          backgroundColor: Color(0xff5b3a68),
+          toolbarHeight: 175,
+          elevation: 20,
+          backgroundColor: Color(0xff351A4D),
           shadowColor: Colors.black,
+          flexibleSpace: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 37, 260, 5),
+            child: Image.asset(
+              "images/p1.png",
+              width: 50,
+              height: 50,
+            ),
+          ),
           title: Padding(
             padding: const EdgeInsets.fromLTRB(10, 70, 10, 5),
             child: Text(
