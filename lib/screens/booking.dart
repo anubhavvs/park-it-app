@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:park_it/widgets/parking_start.dart';
-import 'package:park_it/widgets/success.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/bookings.dart';
@@ -91,14 +90,6 @@ class _BookingScreenState extends State<BookingScreen> {
                     );
                     break;
 
-                  // case 'ENTRY SCAN SUCCESS':
-                  //   return Tick(
-                  //     slotTime: snapdata.data.slotTime,
-                  //     booking_date: snapdata.data.created_at,
-                  //     booked_area: snapdata.data.bookedArea,
-                  //   );
-                  //   break;
-
                   case 'EXIT SCAN SUCCESS':
                     return Payment(
                         snapdata.data.price.toInt(),
@@ -111,7 +102,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     break;
 
                   default:
-                    return Text('Please Wait');
+                    return Text('Please clear app storage and relaunch.');
                 }
             }
           },

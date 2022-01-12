@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:intl/intl.dart';
 
 class For_Scan extends StatefulWidget {
@@ -30,22 +29,13 @@ class _For_ScanState extends State<For_Scan> {
 
   @override
   void initState() {
+    super.initState();
     dateTime = DateFormat("yyyy-MM-dd").format(DateTime.now());
     dateTime = dateTime + ' ' + widget.slotTime + ':00';
     endDate = new DateFormat('yyyy-MM-dd hh:mm:ss').parse(dateTime);
-    endTime = endDate.millisecondsSinceEpoch;
     date_at =
-        new DateFormat('yyyy-MM-dd').parse(widget.booking_date.split('T')[0]);
+        new DateFormat('MM/dd/yyyy').parse(widget.booking_date.split(',')[0]);
     area = widget.booked_area;
-  }
-
-  void onEnd() {
-    bufferEndTime = endTime + 1000 * 60 * 30;
-  }
-
-  void onBufferEnd() {
-    Navigator.of(context)
-        .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
   }
 
   @override
@@ -128,7 +118,8 @@ class _For_ScanState extends State<For_Scan> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Text(
-                "Monday | 22/11/2021 | 21:30".toUpperCase(),
+                '${DateFormat('EEEE').format(date_at)} | ${date_at.day.toString().padLeft(2, '0')}/${date_at.month.toString().padLeft(2, '0')}/${date_at.year} | ${endDate.hour.toString().padLeft(2, '0')}:${endDate.minute.toString().padLeft(2, '0')}'
+                    .toUpperCase(),
                 style: TextStyle(
                   fontSize: 15.0,
                   fontWeight: FontWeight.bold,

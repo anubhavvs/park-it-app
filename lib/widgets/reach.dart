@@ -31,12 +31,13 @@ class _TimerWidegtState extends State<TimerWidegt> {
 
   @override
   void initState() {
+    super.initState();
     dateTime = DateFormat("yyyy-MM-dd").format(DateTime.now());
     dateTime = dateTime + ' ' + widget.slotTime + ':00';
     endDate = new DateFormat('yyyy-MM-dd hh:mm:ss').parse(dateTime);
     endTime = endDate.millisecondsSinceEpoch;
     date_at =
-        new DateFormat('yyyy-MM-dd').parse(widget.booking_date.split('T')[0]);
+        new DateFormat('MM/dd/yyyy').parse(widget.booking_date.split(',')[0]);
     area = widget.booked_area;
   }
 
@@ -98,7 +99,7 @@ class _TimerWidegtState extends State<TimerWidegt> {
     return ListView(
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.fromLTRB(16, 18, 16, 0),
+          padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
           child: Image.asset(
             'images/reach_1.png',
             height: 180,
@@ -106,7 +107,7 @@ class _TimerWidegtState extends State<TimerWidegt> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(25, 45, 25, 0),
+          padding: const EdgeInsets.fromLTRB(25, 20, 25, 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[

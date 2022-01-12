@@ -5,7 +5,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text("Hi"),
+        child: Text("Welcome to the app!"),
       ),
     );
   }

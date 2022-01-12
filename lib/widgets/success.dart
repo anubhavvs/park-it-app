@@ -30,12 +30,13 @@ class _TickState extends State<Tick> {
 
   @override
   void initState() {
+    super.initState();
     dateTime = DateFormat("yyyy-MM-dd").format(DateTime.now());
     dateTime = dateTime + ' ' + widget.slotTime + ':00';
     endDate = new DateFormat('yyyy-MM-dd hh:mm:ss').parse(dateTime);
     endTime = endDate.millisecondsSinceEpoch;
     date_at =
-        new DateFormat('yyyy-MM-dd').parse(widget.booking_date.split('T')[0]);
+        new DateFormat('dd/MM/yyyy').parse(widget.booking_date.split(',')[0]);
     area = widget.booked_area;
   }
 

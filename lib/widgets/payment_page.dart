@@ -187,7 +187,9 @@ class Payment extends StatelessWidget {
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                           Text(
-                            "${start_time.split('T')[1].substring(0, 5)}",
+                            "${start_time.split(',')[1].substring(0, 5) + end_time.split(',')[1].substring(
+                                  8,
+                                )}",
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                         ],
@@ -203,7 +205,9 @@ class Payment extends StatelessWidget {
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                           Text(
-                            "${end_time.split('T')[1].substring(0, 5)}",
+                            "${end_time.split(',')[1].substring(0, 5) + end_time.split(',')[1].substring(
+                                  8,
+                                )}",
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                         ],
@@ -219,7 +223,7 @@ class Payment extends StatelessWidget {
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                           Text(
-                            "${start_time.split('T')[0]}",
+                            "${start_time.split(',')[0].split('/')[1].padLeft(2, '0')}/${start_time.split(',')[0].split('/')[0].padLeft(2, '0')}/${start_time.split(',')[0].split('/')[2]}",
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                         ],
@@ -281,7 +285,7 @@ class Payment extends StatelessWidget {
                 )),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(18, 35, 18, 0),
+            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
             child: OutlinedButton(
               style: OutlinedButton.styleFrom(
                   backgroundColor: Color(0xff916DB0),
